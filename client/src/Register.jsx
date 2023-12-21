@@ -1,12 +1,18 @@
 import { useState } from 'react'; // <-- Import useState
+import axios from 'axios';
 
 export default function Register() {
   const [username, setUsername] = useState(''); // <-- Add this line
   const [password, setPassword] = useState(''); // <-- Add this line
 
+  async function register(ev) {
+    ev.preventDefault();
+    await axios.post('/register', { username, password });
+  }
+
   return (
     <div className="bg-blue-50 h-screen flex items-center">
-      <form className="w-64 mx-auto mb-12">
+      <form className="w-64 mx-auto mb-12" onSubmit={register}>
 
         <input
           value={username} onChange={ev => setUsername(ev.target.value)}
